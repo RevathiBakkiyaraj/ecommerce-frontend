@@ -56,9 +56,9 @@ const Navbar = () => {
     (store) => store
   );
 
-  // -----------------------------------------
+  // ==========================================
   // DESKTOP CATEGORY
-  // -----------------------------------------
+  // ==========================================
 
   const handleCategoryClick = (
     categoryId: string
@@ -67,19 +67,20 @@ const Navbar = () => {
     setShowCategorySheet(true);
   };
 
-  // -----------------------------------------
+  // ==========================================
   // MOBILE CATEGORY
-  // -----------------------------------------
+  // ==========================================
 
   const handleMobileCategoryClick = (
     categoryId: string
   ) => {
     setMobileSelectedCategory(categoryId);
+    setMobileMenuOpen(true);
   };
 
-  // -----------------------------------------
+  // ==========================================
   // CLOSE MOBILE MENU
-  // -----------------------------------------
+  // ==========================================
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
@@ -88,9 +89,9 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ===================================== */}
-      {/* NAVBAR */}
-      {/* ===================================== */}
+      {/* ====================================== */}
+      {/* MAIN NAVBAR */}
+      {/* ====================================== */}
 
       <Box
         className="
@@ -104,6 +105,10 @@ const Navbar = () => {
           zIndex: 1100,
         }}
       >
+        {/* ==================================== */}
+        {/* NAVBAR TOP ROW */}
+        {/* ==================================== */}
+
         <div
           className="
             flex
@@ -117,9 +122,9 @@ const Navbar = () => {
             border-b
           "
         >
-          {/* ================================= */}
+          {/* ================================== */}
           {/* LEFT SECTION */}
-          {/* ================================= */}
+          {/* ================================== */}
 
           <div
             className="
@@ -129,9 +134,7 @@ const Navbar = () => {
               sm:gap-2
             "
           >
-            {/* =============================== */}
-            {/* MOBILE MENU BUTTON */}
-            {/* =============================== */}
+            {/* MOBILE MENU */}
 
             {!isLarge && (
               <IconButton
@@ -144,9 +147,7 @@ const Navbar = () => {
               </IconButton>
             )}
 
-            {/* =============================== */}
             {/* LOGO */}
-            {/* =============================== */}
 
             <h1
               onClick={() => navigate("/")}
@@ -163,9 +164,9 @@ const Navbar = () => {
               Rev Bazaar
             </h1>
 
-            {/* =============================== */}
+            {/* ================================= */}
             {/* DESKTOP CATEGORIES */}
-            {/* =============================== */}
+            {/* ================================= */}
 
             {isLarge && (
               <ul
@@ -211,9 +212,9 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* ================================= */}
+          {/* ================================== */}
           {/* RIGHT SECTION */}
-          {/* ================================= */}
+          {/* ================================== */}
 
           <div
             className="
@@ -224,9 +225,7 @@ const Navbar = () => {
               lg:gap-4
             "
           >
-            {/* =============================== */}
             {/* SEARCH */}
-            {/* =============================== */}
 
             <IconButton
               onClick={() =>
@@ -236,9 +235,7 @@ const Navbar = () => {
               <SearchIcon />
             </IconButton>
 
-            {/* =============================== */}
             {/* ACCOUNT */}
-            {/* =============================== */}
 
             {auth.user ? (
               <Button
@@ -296,9 +293,7 @@ const Navbar = () => {
               </Button>
             )}
 
-            {/* =============================== */}
             {/* WISHLIST */}
-            {/* =============================== */}
 
             <IconButton
               onClick={() =>
@@ -315,9 +310,7 @@ const Navbar = () => {
               />
             </IconButton>
 
-            {/* =============================== */}
             {/* CART */}
-            {/* =============================== */}
 
             <IconButton
               onClick={() =>
@@ -334,9 +327,7 @@ const Navbar = () => {
               />
             </IconButton>
 
-            {/* =============================== */}
             {/* SELLER */}
-            {/* =============================== */}
 
             {isLarge && (
               <Button
@@ -356,9 +347,59 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* ===================================== */}
+        {/* ====================================== */}
+        {/* MOBILE HORIZONTAL CATEGORY BAR */}
+        {/* ====================================== */}
+
+        {!isLarge && (
+          <div
+            className="
+              flex
+              items-center
+              gap-6
+              px-4
+              py-3
+              border-b
+              bg-white
+              overflow-x-auto
+              whitespace-nowrap
+              scrollbar-hide
+            "
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {mainCategory.map(
+              (item) => (
+                <button
+                  key={item.categoryId}
+                  onClick={() =>
+                    handleMobileCategoryClick(
+                      item.categoryId
+                    )
+                  }
+                  className="
+                    flex-shrink-0
+                    text-sm
+                    sm:text-base
+                    font-medium
+                    text-gray-700
+                    hover:text-primary-color
+                    active:text-primary-color
+                    cursor-pointer
+                  "
+                >
+                  {item.name}
+                </button>
+              )
+            )}
+          </div>
+        )}
+
+        {/* ====================================== */}
         {/* DESKTOP CATEGORY SHEET */}
-        {/* ===================================== */}
+        {/* ====================================== */}
 
         {isLarge &&
           showCategorySheet && (
@@ -392,9 +433,9 @@ const Navbar = () => {
           )}
       </Box>
 
-      {/* ===================================== */}
+      {/* ====================================== */}
       {/* MOBILE DRAWER */}
-      {/* ===================================== */}
+      {/* ====================================== */}
 
       <Drawer
         anchor="left"
@@ -412,7 +453,7 @@ const Navbar = () => {
           className="bg-white"
         >
           {/* ================================= */}
-          {/* MAIN MOBILE CATEGORIES */}
+          {/* MAIN CATEGORY LIST */}
           {/* ================================= */}
 
           {!mobileSelectedCategory ? (
@@ -519,7 +560,7 @@ const Navbar = () => {
             /* ================================= */
 
             <>
-              {/* BACK HEADER */}
+              {/* BACK BUTTON */}
 
               <div
                 onClick={() =>
@@ -547,7 +588,7 @@ const Navbar = () => {
                 </span>
               </div>
 
-              {/* CATEGORY SHEET */}
+              {/* CATEGORY CONTENT */}
 
               <div
                 className="
