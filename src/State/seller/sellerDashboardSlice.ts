@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:5454/api/seller/dashboard";
+const API_URL = "https://ecommerce-multivendor-backend-l1dz.onrender.com/api/seller/dashboard";
 
 export interface SalesData {
     day: string;

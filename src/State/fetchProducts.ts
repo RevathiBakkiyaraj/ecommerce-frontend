@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const api="http://localhost:5454/products"
+const api="https://ecommerce-multivendor-backend-l1dz.onrender.com/products"
 export const fetchProducts=async()=> {
     try{
         const response=await axios.get(api)
