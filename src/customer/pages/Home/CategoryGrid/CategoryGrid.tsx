@@ -57,7 +57,7 @@ function CategoryGrid() {
       <div className="col-span-1 sm:col-span-1 lg:col-span-4 lg:row-span-6">
         <img
           className="w-full h-[180px] sm:h-[220px] lg:h-full object-cover object-top rounded-md"
-          src="https://media.istockphoto.com/id/1276740597/photo/indian-traditional-gold-necklace.jpg?s=612x612&w=0&k=20&c=OYp1k0OVJObYq9hqVK_r6NwYa_W54km4nya1R-ovIU="
+          src="https://media.istockphoto.com/id/1276740597/photo/indian-traditional-gold-necklace.jpg?s=612x612&w=0&k=20&c=OYp1k0OVJObYq9hqVK_r6NwYa_W54km4nya1R-ovIUY="
           alt="Gold necklace"
         />
       </div>

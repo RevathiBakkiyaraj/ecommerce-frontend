@@ -18,7 +18,7 @@ const ShopByCategoryCard = ({
         sm:gap-3
         group
         cursor-pointer
-        w-full
+        w-auto
       "
     >
       <div

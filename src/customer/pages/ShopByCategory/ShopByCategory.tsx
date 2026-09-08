@@ -7,16 +7,14 @@ const ShopByCategory = () => {
   return (
     <div
       className="
-        grid
-        grid-cols-2
-        sm:grid-cols-3
-        md:grid-cols-4
-        lg:grid-cols-5
-        xl:grid-cols-6
+        flex
+        flex-wrap
+        justify-center
+        lg:justify-between
         gap-4
         sm:gap-5
         md:gap-6
-        lg:gap-7
+        lg:gap-8
         px-4
         sm:px-6
         md:px-10
