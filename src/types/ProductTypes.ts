@@ -8,12 +8,17 @@ export interface Product{
     discountPercent: number;
     quantity: number;
     color: string;
-    images: string[];
+    images: ProductImage[];
     numRatings?:number;
     category?:Category;
     seller?:Seller;
     createdAt?:Date;
     sizes:string
+}
+
+export interface ProductImage {
+    id?: number;
+    imageUrl: string;
 }
 
 export interface Category{

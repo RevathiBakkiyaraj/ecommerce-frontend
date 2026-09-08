@@ -19,7 +19,11 @@ const OrderDetails = () => {
   return (
     <Box className="space-y-5">
         <section className='flex flex-col gap-5 justify-center items-center'>
-            <img className='w-[100px]' src={order.orderItem?.product.images[0]} alt=""/>
+            <img
+  className="w-[100px]"
+  src={order.orderItem?.product?.images?.[0]?.imageUrl}
+  alt={order.orderItem?.product?.title || "Product"}
+/>
             <div className='text-sm space-y-1 text-center'>
                 <h1 className='font-bold'>{order.orderItem?.product.seller?.businessDetails.businessName}</h1>
                 <p>{order.orderItem?.product.title}</p>
