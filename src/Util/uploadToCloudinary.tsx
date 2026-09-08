@@ -16,7 +16,7 @@ export const uploadtOCloudinary=async(pics:any)=>{
         })
 
         const fileData=await res.json();
-        return fileData.url;
+       return fileData.secure_url;
     }
     else{
         console.log("error: pics not found");
