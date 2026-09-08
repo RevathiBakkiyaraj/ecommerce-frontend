@@ -28,13 +28,8 @@ import { useAppSelector } from "../../../State/Store";
 const Navbar = () => {
   const theme = useTheme();
 
-  const isLarge = useMediaQuery(
-    theme.breakpoints.up("lg")
-  );
-
-  const isMobile = useMediaQuery(
-    theme.breakpoints.down("md")
-  );
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [selectedCategory, setSelectedCategory] =
     useState("men");
@@ -100,13 +95,14 @@ const Navbar = () => {
           left-0
           right-0
           bg-white
+          w-full
         "
         sx={{
           zIndex: 1100,
         }}
       >
         {/* ==================================== */}
-        {/* NAVBAR TOP ROW */}
+        {/* TOP NAVBAR */}
         {/* ==================================== */}
 
         <div
@@ -114,11 +110,14 @@ const Navbar = () => {
             flex
             items-center
             justify-between
+            w-full
             px-2
-            sm:px-5
+            sm:px-4
+            md:px-8
             lg:px-20
             h-[60px]
-            sm:h-[70px]
+            sm:h-[68px]
+            lg:h-[70px]
             border-b
           "
         >
@@ -130,18 +129,20 @@ const Navbar = () => {
             className="
               flex
               items-center
+              min-w-0
               gap-1
               sm:gap-2
             "
           >
-            {/* MOBILE MENU */}
+            {/* MOBILE MENU BUTTON */}
 
             {!isLarge && (
               <IconButton
                 onClick={() =>
                   setMobileMenuOpen(true)
                 }
-                size="small"
+                size={isMobile ? "small" : "medium"}
+                aria-label="open menu"
               >
                 <MenuIcon />
               </IconButton>
@@ -164,9 +165,7 @@ const Navbar = () => {
               Rev Bazaar
             </h1>
 
-            {/* ================================= */}
             {/* DESKTOP CATEGORIES */}
-            {/* ================================= */}
 
             {isLarge && (
               <ul
@@ -175,39 +174,38 @@ const Navbar = () => {
                   items-center
                   font-medium
                   text-gray-800
-                  ml-4
+                  ml-3
+                  xl:ml-6
                 "
               >
-                {mainCategory.map(
-                  (item) => (
-                    <li
-                      key={item.categoryId}
-                      onMouseLeave={() =>
-                        setShowCategorySheet(
-                          false
-                        )
-                      }
-                      onMouseEnter={() => {
-                        handleCategoryClick(
-                          item.categoryId
-                        );
-                      }}
-                      className="
-                        mainCategory
-                        hover:text-primary-color
-                        hover:border-b-2
-                        h-[70px]
-                        px-4
-                        border-primary-color
-                        flex
-                        items-center
-                        cursor-pointer
-                      "
-                    >
-                      {item.name}
-                    </li>
-                  )
-                )}
+                {mainCategory.map((item) => (
+                  <li
+                    key={item.categoryId}
+                    onMouseLeave={() =>
+                      setShowCategorySheet(false)
+                    }
+                    onMouseEnter={() =>
+                      handleCategoryClick(
+                        item.categoryId
+                      )
+                    }
+                    className="
+                      mainCategory
+                      hover:text-primary-color
+                      hover:border-b-2
+                      h-[70px]
+                      px-3
+                      xl:px-4
+                      border-primary-color
+                      flex
+                      items-center
+                      cursor-pointer
+                      whitespace-nowrap
+                    "
+                  >
+                    {item.name}
+                  </li>
+                ))}
               </ul>
             )}
           </div>
@@ -220,19 +218,30 @@ const Navbar = () => {
             className="
               flex
               items-center
+              flex-shrink-0
               gap-0
-              sm:gap-2
-              lg:gap-4
+              sm:gap-1
+              md:gap-2
+              lg:gap-3
+              xl:gap-4
             "
           >
             {/* SEARCH */}
 
             <IconButton
-              onClick={() =>
-                navigate("/search")
-              }
+              onClick={() => navigate("/search")}
+              size={isMobile ? "small" : "medium"}
+              aria-label="search"
             >
-              <SearchIcon />
+              <SearchIcon
+                sx={{
+                  fontSize: {
+                    xs: 22,
+                    sm: 25,
+                    md: 28,
+                  },
+                }}
+              />
             </IconButton>
 
             {/* ACCOUNT */}
@@ -240,32 +249,33 @@ const Navbar = () => {
             {auth.user ? (
               <Button
                 onClick={() =>
-                  navigate(
-                    "/account/orders"
-                  )
+                  navigate("/account/orders")
                 }
+                sx={{
+                  minWidth: "auto",
+                  padding: {
+                    xs: "3px",
+                    sm: "4px 6px",
+                    md: "5px 8px",
+                  },
+                }}
                 className="
                   flex
                   items-center
                   gap-1
                 "
-                sx={{
-                  minWidth: "auto",
-                  padding: {
-                    xs: "4px",
-                    sm: "6px 10px",
-                  },
-                }}
               >
                 <Avatar
                   sx={{
                     width: {
                       xs: 28,
                       sm: 32,
+                      md: 36,
                     },
                     height: {
                       xs: 28,
                       sm: 32,
+                      md: 36,
                     },
                   }}
                   src="https://media.istockphoto.com/id/1094918638/photo/beat-the-deadline-with-technology.jpg?s=2048x2048&w=is&k=20&c=s9Uvd_8ZiEzpckpPvxlzmwsYTTYHi492MMLUWw6Twc0="
@@ -273,9 +283,11 @@ const Navbar = () => {
 
                 <span
                   className="
-                    font-semibold
                     hidden
                     lg:block
+                    font-semibold
+                    max-w-[120px]
+                    truncate
                   "
                 >
                   {auth.user?.fullName}
@@ -283,11 +295,19 @@ const Navbar = () => {
               </Button>
             ) : (
               <Button
-                onClick={() =>
-                  navigate("/login")
-                }
+                onClick={() => navigate("/login")}
                 variant="contained"
                 size="small"
+                sx={{
+                  minWidth: {
+                    xs: 55,
+                    sm: 65,
+                  },
+                  fontSize: {
+                    xs: "0.7rem",
+                    sm: "0.8rem",
+                  },
+                }}
               >
                 Login
               </Button>
@@ -296,15 +316,16 @@ const Navbar = () => {
             {/* WISHLIST */}
 
             <IconButton
-              onClick={() =>
-                navigate("/wishlist")
-              }
+              onClick={() => navigate("/wishlist")}
+              size={isMobile ? "small" : "medium"}
+              aria-label="wishlist"
             >
               <FavoriteBorder
                 sx={{
                   fontSize: {
-                    xs: 24,
-                    sm: 29,
+                    xs: 22,
+                    sm: 26,
+                    md: 29,
                   },
                 }}
               />
@@ -313,33 +334,34 @@ const Navbar = () => {
             {/* CART */}
 
             <IconButton
-              onClick={() =>
-                navigate("/cart")
-              }
+              onClick={() => navigate("/cart")}
+              size={isMobile ? "small" : "medium"}
+              aria-label="cart"
             >
               <AddShoppingCart
                 sx={{
                   fontSize: {
-                    xs: 24,
-                    sm: 29,
+                    xs: 22,
+                    sm: 26,
+                    md: 29,
                   },
                 }}
               />
             </IconButton>
 
-            {/* SELLER */}
+            {/* BECOME SELLER */}
 
             {isLarge && (
               <Button
                 onClick={() =>
-                  navigate(
-                    "/become-seller"
-                  )
+                  navigate("/become-seller")
                 }
-                startIcon={
-                  <Storefront />
-                }
+                startIcon={<Storefront />}
                 variant="outlined"
+                size="medium"
+                sx={{
+                  whiteSpace: "nowrap",
+                }}
               >
                 Become Seller
               </Button>
@@ -348,7 +370,7 @@ const Navbar = () => {
         </div>
 
         {/* ====================================== */}
-        {/* MOBILE HORIZONTAL CATEGORY BAR */}
+        {/* MOBILE CATEGORY BAR */}
         {/* ====================================== */}
 
         {!isLarge && (
@@ -356,44 +378,45 @@ const Navbar = () => {
             className="
               flex
               items-center
-              gap-6
+              gap-5
+              sm:gap-7
               px-4
-              py-3
+              sm:px-6
+              py-2.5
+              sm:py-3
               border-b
               bg-white
               overflow-x-auto
               whitespace-nowrap
-              scrollbar-hide
             "
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
           >
-            {mainCategory.map(
-              (item) => (
-                <button
-                  key={item.categoryId}
-                  onClick={() =>
-                    handleMobileCategoryClick(
-                      item.categoryId
-                    )
-                  }
-                  className="
-                    flex-shrink-0
-                    text-sm
-                    sm:text-base
-                    font-medium
-                    text-gray-700
-                    hover:text-primary-color
-                    active:text-primary-color
-                    cursor-pointer
-                  "
-                >
-                  {item.name}
-                </button>
-              )
-            )}
+            {mainCategory.map((item) => (
+              <button
+                key={item.categoryId}
+                onClick={() =>
+                  handleMobileCategoryClick(
+                    item.categoryId
+                  )
+                }
+                className="
+                  flex-shrink-0
+                  text-xs
+                  sm:text-sm
+                  md:text-base
+                  font-medium
+                  text-gray-700
+                  hover:text-primary-color
+                  active:text-primary-color
+                  cursor-pointer
+                "
+              >
+                {item.name}
+              </button>
+            ))}
           </div>
         )}
 
@@ -401,36 +424,36 @@ const Navbar = () => {
         {/* DESKTOP CATEGORY SHEET */}
         {/* ====================================== */}
 
-        {isLarge &&
-          showCategorySheet && (
-            <div
-              onMouseLeave={() =>
-                setShowCategorySheet(
-                  false
-                )
+        {isLarge && showCategorySheet && (
+          <div
+            onMouseLeave={() =>
+              setShowCategorySheet(false)
+            }
+            onMouseEnter={() =>
+              setShowCategorySheet(true)
+            }
+            className="
+              categorySheet
+              absolute
+              top-[70px]
+              left-4
+              right-4
+              lg:left-10
+              lg:right-10
+              xl:left-20
+              xl:right-20
+              border
+              bg-white
+              shadow-md
+            "
+          >
+            <CategorySheet
+              selectedCategory={
+                selectedCategory
               }
-              onMouseEnter={() =>
-                setShowCategorySheet(
-                  true
-                )
-              }
-              className="
-                categorySheet
-                absolute
-                top-[4.41rem]
-                left-20
-                right-20
-                border
-                bg-white
-              "
-            >
-              <CategorySheet
-                selectedCategory={
-                  selectedCategory
-                }
-              />
-            </div>
-          )}
+            />
+          </div>
+        )}
       </Box>
 
       {/* ====================================== */}
@@ -445,9 +468,11 @@ const Navbar = () => {
         <Box
           sx={{
             width: {
-              xs: 300,
+              xs: "82vw",
               sm: 360,
+              md: 400,
             },
+            maxWidth: 400,
             height: "100%",
           }}
           className="bg-white"
@@ -463,6 +488,7 @@ const Navbar = () => {
               <div
                 className="
                   p-4
+                  sm:p-5
                   border-b
                   flex
                   items-center
@@ -471,7 +497,8 @@ const Navbar = () => {
               >
                 <h2
                   className="
-                    text-xl
+                    text-lg
+                    sm:text-xl
                     font-semibold
                   "
                 >
@@ -484,7 +511,9 @@ const Navbar = () => {
                     text-gray-500
                     text-2xl
                     px-2
+                    cursor-pointer
                   "
+                  aria-label="close menu"
                 >
                   ×
                 </button>
@@ -493,60 +522,59 @@ const Navbar = () => {
               {/* CATEGORY LIST */}
 
               <div>
-                {mainCategory.map(
-                  (item) => (
-                    <div
-                      key={
+                {mainCategory.map((item) => (
+                  <div
+                    key={item.categoryId}
+                    onClick={() =>
+                      handleMobileCategoryClick(
                         item.categoryId
-                      }
-                      onClick={() =>
-                        handleMobileCategoryClick(
-                          item.categoryId
-                        )
-                      }
+                      )
+                    }
+                    className="
+                      py-3.5
+                      sm:py-4
+                      px-5
+                      border-b
+                      cursor-pointer
+                      flex
+                      justify-between
+                      items-center
+                      hover:text-primary-color
+                      hover:bg-gray-50
+                      transition-colors
+                      duration-200
+                    "
+                  >
+                    <span
                       className="
-                        py-4
-                        px-5
-                        border-b
-                        cursor-pointer
-                        flex
-                        justify-between
-                        items-center
-                        hover:text-primary-color
-                        transition-colors
-                        duration-200
+                        text-sm
+                        sm:text-base
                       "
                     >
-                      <span>
-                        {item.name}
-                      </span>
+                      {item.name}
+                    </span>
 
-                      <span
-                        className="
-                          text-xl
-                          text-gray-500
-                        "
-                      >
-                        ›
-                      </span>
-                    </div>
-                  )
-                )}
+                    <span
+                      className="
+                        text-xl
+                        text-gray-500
+                      "
+                    >
+                      ›
+                    </span>
+                  </div>
+                ))}
               </div>
 
               {/* BECOME SELLER */}
 
-              <div className="p-4">
+              <div className="p-4 sm:p-5">
                 <Button
                   fullWidth
                   variant="outlined"
-                  startIcon={
-                    <Storefront />
-                  }
+                  startIcon={<Storefront />}
                   onClick={() => {
-                    navigate(
-                      "/become-seller"
-                    );
+                    navigate("/become-seller");
                     closeMobileMenu();
                   }}
                 >
@@ -555,18 +583,12 @@ const Navbar = () => {
               </div>
             </>
           ) : (
-            /* ================================= */
-            /* SELECTED CATEGORY */
-            /* ================================= */
-
             <>
               {/* BACK BUTTON */}
 
               <div
                 onClick={() =>
-                  setMobileSelectedCategory(
-                    null
-                  )
+                  setMobileSelectedCategory(null)
                 }
                 className="
                   p-4
@@ -583,7 +605,7 @@ const Navbar = () => {
                   ←
                 </span>
 
-                <span>
+                <span className="text-sm sm:text-base">
                   Categories
                 </span>
               </div>

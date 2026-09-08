@@ -1,32 +1,56 @@
-import { Button } from '@mui/material'
-import React, { useState } from 'react'
-import DealTable from './DealTable'
-import DealCategoryTable from './DealCategoryTable'
-import CreateDealForm from './CreateDealForm'
+import { Button } from "@mui/material";
+import React, { useState } from "react";
+import DealTable from "./DealTable";
+import DealCategoryTable from "./DealCategoryTable";
+import CreateDealForm from "./CreateDealForm";
 
-const tabs=[
+const tabs = [
   "Deals",
   "Category",
-  "Create Deal"
-]
+  "Create Deal",
+];
 
 const Deal = () => {
-  const [activeTab,setActiveTab]=useState("Deals")
+  const [activeTab, setActiveTab] = useState("Deals");
+
   return (
-    <div>
-      <div className='flex gap-4'>
-        {tabs.map((item)=><Button onClick={()=> setActiveTab(item)} variant={activeTab==item?"contained":"outlined"}>{item}
+    <div className="w-full">
 
-        </Button>)}
-
+      {/* Tabs */}
+      <div className="flex flex-wrap gap-2 sm:gap-3 px-2 sm:px-0">
+        {tabs.map((item) => (
+          <Button
+            key={item}
+            onClick={() => setActiveTab(item)}
+            variant={activeTab === item ? "contained" : "outlined"}
+            size="small"
+            sx={{
+              minWidth: {
+                xs: "90px",
+                sm: "110px",
+              },
+            }}
+          >
+            {item}
+          </Button>
+        ))}
       </div>
-      <div className='mt-5'>
-        {activeTab=="Deals"?<DealTable/>:activeTab=="Category"?<DealCategoryTable/>:<div className='mt-5 flex flex-col justify-center items-center h-[70vh]'>
-          <CreateDealForm/></div>}
 
+      {/* Content */}
+      <div className="mt-5 w-full overflow-x-auto">
+        {activeTab === "Deals" ? (
+          <DealTable />
+        ) : activeTab === "Category" ? (
+          <DealCategoryTable />
+        ) : (
+          <div className="mt-5 flex justify-center items-center px-2 sm:px-4">
+            <CreateDealForm />
+          </div>
+        )}
       </div>
+
     </div>
-  )
-}
+  );
+};
 
-export default Deal
+export default Deal;
