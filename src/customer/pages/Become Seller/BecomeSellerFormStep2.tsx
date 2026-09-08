@@ -1,114 +1,149 @@
+import { Box, Grid2, TextField } from '@mui/material';
 
-import { Box, Grid2, TextField } from '@mui/material'
+const BecomeSellerFormStep2 = ({ formik }: any) => {
 
+    return (
+        <Box>
 
+            <Grid2 container spacing={3}>
 
-const BecomeSellerFormStep2 = ({formik}:any) => {
- 
-  return (
-    <Box>
+                {/* Name */}
+                <Grid2 size={{ xs: 12 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.name"
+                        label="Name"
+                        value={formik.values.pickupAddress.name}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.name &&
+                            Boolean(formik.errors.pickupAddress?.name)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.name &&
+                            formik.errors.pickupAddress?.name
+                        }
+                    />
+                </Grid2>
 
-    
+                {/* Mobile */}
+                <Grid2 size={{ xs: 6 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.mobile"
+                        label="Mobile"
+                        value={formik.values.pickupAddress.mobile}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.mobile &&
+                            Boolean(formik.errors.pickupAddress?.mobile)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.mobile &&
+                            formik.errors.pickupAddress?.mobile
+                        }
+                    />
+                </Grid2>
 
-        <>
-           <Grid2 container spacing={3}>
-            <Grid2 size={{xs:12}}>
+                {/* Pin Code */}
+                <Grid2 size={{ xs: 6 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.pincode"
+                        label="Pin Code"
+                        value={formik.values.pickupAddress.pincode}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.pincode &&
+                            Boolean(formik.errors.pickupAddress?.pincode)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.pincode &&
+                            formik.errors.pickupAddress?.pincode
+                        }
+                    />
+                </Grid2>
 
-                <TextField fullWidth
-                name="name"
-                label="Name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}/>
-                
+                {/* Address */}
+                <Grid2 size={{ xs: 12 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.address"
+                        label="Address"
+                        value={formik.values.pickupAddress.address}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.address &&
+                            Boolean(formik.errors.pickupAddress?.address)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.address &&
+                            formik.errors.pickupAddress?.address
+                        }
+                    />
+                </Grid2>
+
+                {/* Locality */}
+                <Grid2 size={{ xs: 12 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.locality"
+                        label="Locality"
+                        value={formik.values.pickupAddress.locality}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.locality &&
+                            Boolean(formik.errors.pickupAddress?.locality)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.locality &&
+                            formik.errors.pickupAddress?.locality
+                        }
+                    />
+                </Grid2>
+
+                {/* City */}
+                <Grid2 size={{ xs: 6 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.city"
+                        label="City"
+                        value={formik.values.pickupAddress.city}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.city &&
+                            Boolean(formik.errors.pickupAddress?.city)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.city &&
+                            formik.errors.pickupAddress?.city
+                        }
+                    />
+                </Grid2>
+
+                {/* State */}
+                <Grid2 size={{ xs: 6 }}>
+                    <TextField
+                        fullWidth
+                        name="pickupAddress.state"
+                        label="State"
+                        value={formik.values.pickupAddress.state}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.pickupAddress?.state &&
+                            Boolean(formik.errors.pickupAddress?.state)
+                        }
+                        helperText={
+                            formik.touched.pickupAddress?.state &&
+                            formik.errors.pickupAddress?.state
+                        }
+                    />
+                </Grid2>
 
             </Grid2>
 
-            <Grid2 size={{xs:6}}>
+        </Box>
+    );
+};
 
-                <TextField fullWidth
-                name="mobile"
-                label="Mobile"
-                value={formik.values.mobile}
-                onChange={formik.handleChange}
-                error={formik.touched.mobile && Boolean(formik.errors.mobile)}
-                helperText={formik.touched.mobile && formik.errors.mobile}/>
-                
-
-            </Grid2>
-
-            <Grid2 size={{xs:6}}>
-
-                <TextField fullWidth
-                name="pinCode"
-                label="Pin Code"
-                value={formik.values.pinCode}
-                onChange={formik.handleChange}
-                error={formik.touched.pinCode && Boolean(formik.errors.pinCode)}
-                helperText={formik.touched.pinCode && formik.errors.pinCode}/>
-                
-
-            </Grid2>
-
-            <Grid2 size={{xs:12}}>
-
-                <TextField fullWidth
-                name="address"
-                label="Address"
-                value={formik.values.address}
-                onChange={formik.handleChange}
-                error={formik.touched.address && Boolean(formik.errors.address)}
-                helperText={formik.touched.address && formik.errors.address}/>
-                
-
-            </Grid2>
-
-            <Grid2 size={{xs:12}}>
-
-                <TextField fullWidth
-                name="locality"
-                label="Locality"
-                value={formik.values.locality}
-                onChange={formik.handleChange}
-                error={formik.touched.locality && Boolean(formik.errors.locality)}
-                helperText={formik.touched.locality && formik.errors.locality}/>
-                
-
-            </Grid2>
-
-            <Grid2 size={{xs:6}}>
-
-                <TextField fullWidth
-                name="city"
-                label="City"
-                value={formik.values.city}
-                onChange={formik.handleChange}
-                error={formik.touched.city && Boolean(formik.errors.city)}
-                helperText={formik.touched.city && formik.errors.city}/>
-                
-
-            </Grid2>
-
-            <Grid2 size={{xs:6}}>
-
-                <TextField fullWidth
-                name="state"
-                label="State"
-                value={formik.values.state}
-                onChange={formik.handleChange}
-                error={formik.touched.state && Boolean(formik.errors.state)}
-                helperText={formik.touched.state && formik.errors.state}/>
-                
-
-            </Grid2>
-          
-                
-           </Grid2>
-        </>
-
-    </Box>
-  )
-}
-
-export default BecomeSellerFormStep2
+export default BecomeSellerFormStep2;

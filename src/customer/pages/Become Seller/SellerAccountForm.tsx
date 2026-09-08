@@ -5,6 +5,7 @@ import BecomeSellerFormStep2 from './BecomeSellerFormStep2';
 import BecomeSellerFormStep3 from './BecomeSellerFormStep3';
 import BecomeSellerFormStep4 from './BecomeSellerFormStep4';
 import { useFormik } from 'formik';
+import { api } from '../../../config/Api';
 
 
 const steps = [
@@ -24,9 +25,57 @@ const SellerAccountForm = () => {
         console.log("active step:", activeStep)
     };
 
-    const handleCreateAccount = () => {
-        console.log("create account")
+    const handleCreateAccount = async () => {
+    try {
+        console.log("Creating seller...", formik.values);
+
+        const response = await api.post("/sellers", {
+            email: formik.values.email,
+            password: formik.values.password,
+            sellerName: formik.values.sellerName,
+            mobile: formik.values.mobile,
+            GSTIN: formik.values.gstin,
+
+            pickupAddress: {
+                name: formik.values.pickupAddress.name,
+                mobile: formik.values.pickupAddress.mobile,
+                pinCode: formik.values.pickupAddress.pincode,
+                address: formik.values.pickupAddress.address,
+                locality: formik.values.pickupAddress.locality,
+                city: formik.values.pickupAddress.city,
+                state: formik.values.pickupAddress.state,
+            },
+
+            bankDetails: {
+                accountNumber: formik.values.bankDetails.accountNumber,
+                ifscCode: formik.values.bankDetails.ifscCode,
+                accountHolderName:
+                    formik.values.bankDetails.accountHolderName,
+            },
+
+            businessDetails: {
+                businessName:
+                    formik.values.businessDetails.businessName,
+                businessEmail:
+                    formik.values.businessDetails.businessEmail,
+                businessMobile:
+                    formik.values.businessDetails.businessMobile,
+                logo: formik.values.businessDetails.logo,
+                banner: formik.values.businessDetails.banner,
+                businessAddress:
+                    formik.values.businessDetails.businessAddress,
+            },
+        });
+
+        console.log("Seller created successfully:", response.data);
+
+    } catch (error: any) {
+        console.error(
+            "Seller creation failed:",
+            error.response?.data || error
+        );
     }
+};
 
     const formik = useFormik({
         initialValues: {
