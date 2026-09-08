@@ -15,7 +15,11 @@ const WishlistProductCard = ({item}:{item:Product}) => {
   return (
     <div className='w-60 relative'>
       <div className='w-full'>
-        <img src={item.images[0]} className='object-top w-full' alt=""/>
+  <img
+  src={item.images?.[0]?.imageUrl}
+  className="object-top w-full"
+  alt={item.title}
+/>
 
       </div>
       <div className='pt-3 space-y-1'>

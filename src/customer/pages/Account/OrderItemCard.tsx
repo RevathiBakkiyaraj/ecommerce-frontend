@@ -27,7 +27,7 @@ const OrderItemCard = ({item,order}:{item:OrderItem,order:Order}) => {
 
       <div className='p-5 bg-teal-50 flex gap-3'>
         <div>
-          <img className='w-[70px]'src={item.product.images[0]} alt=""/>
+          <img className='w-[70px]'src={item.product.images?.[0]?.imageUrl} alt={item.product.title || "Product"} />
         </div>
         <div className='w-full space-y-2'>
           <h1 className='font-bold'>{item.product.seller?.businessDetails.businessName}</h1>

@@ -151,7 +151,7 @@ const ProductCard = ({ item }: { item: Product }) => {
           <img
             key={index}
             className="card-media"
-            src={image}
+            src={image.imageUrl}
             alt={item.title}
             style={{
               transform: `

@@ -46,7 +46,11 @@ const CartItemCard = ({item}:{item:CartItem}) => {
         <div className='p-5 flex gap-3'>
 
             <div>
-                <img className='w-[90px] rounded-md ' src={item.product.images[0]} alt="" />
+                <img
+  className="w-[90px] rounded-md"
+  src={item.product?.images?.[0]?.imageUrl}
+  alt={item.product?.title || "Product"}
+/>
             </div>
             <div className='space-y-2'>
                 <h1 className='font-semibold text-lg'>{item.product.seller?.businessDetails.businessName}</h1>

@@ -64,12 +64,22 @@ const handleWishlist = () => {
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
         <section className='flex flex-col lg:flex-row gap-5'>
           <div className='w-full lg:w-[15%] flex flex-wrap lg:flex-col gap-3'>
-            {product.product?.images.map((item,index)=><img onClick={handleActiveImage(index)} className='lg:w-full w-[50px] cursor-pointer rounded-md' src={item} alt="" />)}
-
+            {product.product?.images?.map((item, index) => (
+  <img
+    key={item.id}
+    onClick={handleActiveImage(index)}
+    className="lg:w-full w-[50px] cursor-pointer rounded-md"
+    src={item.imageUrl}
+    alt={product.product?.title || "Product"}
+  />
+))}
           </div>
           <div className='w-full lg:w-[85%]'>
-            <img className='w-full rounded-md' src={product.product?.images[activeImage]} alt=""/>
-
+           <img
+  className="w-full rounded-md"
+  src={product.product?.images?.[activeImage]?.imageUrl}
+  alt={product.product?.title || "Product"}
+/>
           </div>
         </section>
           <section>

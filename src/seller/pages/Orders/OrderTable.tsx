@@ -105,7 +105,7 @@ export default function OrderTable() {
                 <div className='flex gap-1 flex-wrap'>
                   {
                     item.orderItems.map((orderItem)=><div className='flex gap-5'>
-                      <img className='w-20 rounded-md' src={orderItem.product.images[0]} alt=""/>
+                      <img className='w-20 rounded-md' src={orderItem.product.images?.[0]?.imageUrl} alt={orderItem.product.title || "Product"} />
                       <div className='flex flex-col justify-between py-2'>
                         <h1>Title: {orderItem.product.title}</h1>
                         <h1>Selling Price: {orderItem.product.sellingPrice}</h1>
